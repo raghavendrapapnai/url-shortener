@@ -1,0 +1,25 @@
+<div class="container">
+
+    <form #urlForm="ngForm" (ngSubmit)="onSubmitUrlForm()">
+        <h1>URL Shortener</h1>
+        <div class="form-control mb-3">
+            <label for="url" class="form-label">Enter URL</label>
+            <input class="form-control" name="fullUrl" type="url" [ngModel]="fullUrl">
+        </div>
+        <button class="btn btn-success" type="submit">Shorten URL</button>
+    </form>
+
+    <div class="my-3">
+
+        <table class="table table-striped">
+            <thead>
+                <th>Original URL</th>
+                <th>Short URL</th>
+            </thead>
+            <tbody>
+                <td>{{fullUrl}}</td>
+                <td>{{shortUrl}}</td>
+            </tbody>
+        </table>
+    </div>
+</div>
