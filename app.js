@@ -7,18 +7,28 @@ const port = 3000
 
 const app = express()
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-app.get('/', async (req, res) => {
-    const allData = await ShortUrl.find()
-    res.send("Response from server")
-    //logic to connect to angular
+// app.get('/', async (req, res) => {
+//     const allData = await ShortUrl.find()
+//     res.send("Response from server: " + allData)
+//     //logic to connect to angular
+// })
+
+app.get('/', (req, res) => {
+    ShortUrl.find({}, (err, data) => {
+        if (!err) {
+            res.send(data)
+        } else {
+            console.log(err);
+        }
+    })
 })
 
 app.post('/short', async (req, res) => {
     const fullUrl = req.body.fullUrl
     console.log('URL requested: ', fullUrl)
-
     const record = new ShortUrl({
         full: fullUrl
     })
@@ -26,6 +36,24 @@ app.post('/short', async (req, res) => {
     await record.save()
     res.redirect('/')
 })
+
+// app.post('/short', (req, res) => {
+//     const fullUrl = req.body.fullUrl
+//     console.log('URL requested: ', fullUrl)
+
+//     const record = new ShortUrl({
+//         full: req.body.fullUrl
+//     })
+
+//     record.save((err, data) => {
+//         if (!err) {
+//             res.send(data)
+//         } else {
+//             console.log(err)
+//         }
+//     })
+//     res.redirect('/')
+// })
 
 app.get('/:shortid', async (req, res) => {
     const shortid = req.params.shortid
