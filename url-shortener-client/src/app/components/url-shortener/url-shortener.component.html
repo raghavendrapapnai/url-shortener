@@ -20,7 +20,9 @@
             <tbody>
                 <tr *ngFor='let u of allUrls'>
                     <td class="text">{{u.full}}</td>
-                    <td>{{u.short}}</td>
+                    <td><a href="http://localhost:3000/{{u.short}}" role="button" (click)="shortUrlClicked(u.short)">
+                            {{u.short}}
+                        </a></td>
                 </tr>
             </tbody>
         </table>

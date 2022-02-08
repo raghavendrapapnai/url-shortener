@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UrlService } from 'src/app/services/url.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class UrlShortenerComponent implements OnInit {
   allUrls: any;
   urlForm: any;
 
-  constructor(private urlService: UrlService) { }
+  constructor(private urlService: UrlService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getUrls()
@@ -35,10 +36,9 @@ export class UrlShortenerComponent implements OnInit {
     }, 500);
   }
 
-  shortUrlClick(_id: any) {
-    this.urlService.getShortUrl(_id).subscribe(res => {
-      console.log(res);
-
+  shortUrlClicked(shortUrl: any) {
+    this.urlService.getShortUrl(shortUrl).subscribe(res => {
+      console.log(res)
     })
   }
 

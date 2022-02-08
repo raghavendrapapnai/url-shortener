@@ -10,12 +10,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-// app.get('/', async (req, res) => {
-//     const allData = await ShortUrl.find()
-//     res.send("Response from server: " + allData)
-//     //logic to connect to angular
-// })
-
 app.get('/', (req, res) => {
     ShortUrl.find({}, (err, data) => {
         if (!err) {

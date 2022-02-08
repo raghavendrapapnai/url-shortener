@@ -24,8 +24,11 @@ export class UrlService {
     return this.http.post(`${this.backend_url}/short`, { fullUrl: fullUrl })
   }
 
-  getShortUrl(_id: any) {
-    return this.http.get(`${this.backend_url}/${_id}`)
+  getShortUrl(shortUrl: any) {
+    console.log(`${this.backend_url}/${shortUrl}`)
+    return this.http.get(`${this.backend_url}/${shortUrl}`)
+
+
   }
 
 }
